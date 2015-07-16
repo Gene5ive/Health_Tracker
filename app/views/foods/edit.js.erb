@@ -1,3 +1,4 @@
+$('#add_food_link').hide();
 $('#edit_food_link').hide().after('<%= j render("form") %>');
 $('#calorie_total').text('<%= @user.foods.sum(:calories) %>');
 $('#calorie_net').text('<%= @user.foods.sum(:calories) - @user.exercises.sum(:burned) %>');

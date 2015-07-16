@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post "/log-in" => "sessions#create"
   get "/log-out" => "sessions#destroy", as: :log_out
 
+  get "/errors" => "foods#errors"
+
   resources :users do
     resources :foods
   end

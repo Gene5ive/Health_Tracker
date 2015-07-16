@@ -33,7 +33,10 @@ class FoodsController < ApplicationController
         format.js
       end
     else
-      render :edit
+      respond_to do |format|
+        format.html { redirect_to errors_path }
+        format.js
+      end
     end
   end
 

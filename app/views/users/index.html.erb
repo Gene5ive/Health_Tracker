@@ -1,13 +1,13 @@
 <h1 class="page-header text-center">Welcome to Health Tracker</h1>
-
 <% if current_user %>
 <div class="row">
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+    <div id="errors">
+    </div>
     <%= link_to 'Add Food', new_user_food_path(@user), id: "add_food_link", :class => "btn btn-success", remote: true %>
     <ul id ="foods_list">
       <%= sortable_food "name" %> |
       <%= sortable_food "calories" %>
-
       <%= render(@foods) %>
     </ul>
     <h2>Total Calories Consumed: <span id="calorie_total"><%= @user.foods.sum(:calories) %></span></h2>
@@ -22,5 +22,16 @@
     <h2>Total Calories Burned: <span id="burned_total"><%= @user.exercises.sum(:burned) %></span></h2>
   </div>
 </div>
+
+<%= total = (@user.foods.sum(:calories) + @user.exercises.sum(:burned)) %>
+<%= burned_percentage = (@user.exercises.sum(:burned) / total) * 100 %>
+<%= calories_percentage = (@user.foods.sum(:calories) / total) * 100 %>
+
 <h2 class="text-center">Net Calories: <span id="calorie_net"><%= @user.foods.sum(:calories) - @user.exercises.sum(:burned) %></span></h2>
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped active" style='"width: ' + #{calories_percentage} + '%"'>
+  </div>
+  <div class="progress-bar progress-bar-warning" style='"width: ' + burned_percentage + '%"'>
+  </div>
+</div>
 <% end %>
