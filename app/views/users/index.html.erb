@@ -5,8 +5,8 @@
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
     <%= link_to 'Add Food', new_user_food_path(@user), id: "add_food_link", :class => "btn btn-success", remote: true %>
     <ul id ="foods_list">
-      <%= sortable "name" %> |
-      <%= sortable "calories" %>
+      <%= sortable_food "name" %> |
+      <%= sortable_food "calories" %>
 
       <%= render(@foods) %>
     </ul>
@@ -15,7 +15,9 @@
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
     <%= link_to 'Add Exercise', new_user_exercise_path(@user), id: "add_exercise_link", :class => "btn btn-success", remote: true %>
     <ul id ="exercises_list">
-      <%= render(@user.exercises) %>
+      <%= sortable_exercise "exercise_name" %> |
+      <%= sortable_exercise "burned" %>
+      <%= render(@exercises) %>
     </ul>
     <h2>Total Calories Burned: <span id="burned_total"><%= @user.exercises.sum(:burned) %></span></h2>
   </div>

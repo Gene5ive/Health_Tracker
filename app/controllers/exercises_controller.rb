@@ -27,7 +27,7 @@ class ExercisesController < ApplicationController
     @user = User.find(params[:user_id])
     @exercise = Exercise.find(params[:id])
     if @exercise.update(exercise_params)
-      flash[:notice] = @exercise.name + ' has been updated.'
+      flash[:notice] = @exercise.exercise_name + ' has been updated.'
     else
       render :edit
     end
@@ -41,7 +41,7 @@ class ExercisesController < ApplicationController
     @user = User.find(params[:user_id])
     @exercise = Exercise.find(params[:id])
     @exercise.destroy
-    flash[:notice] = @exercise.name + " has been removed."
+    flash[:notice] = @exercise.exercise_name + " has been removed."
     respond_to do |format|
       format.html { redirect_to user_exercises_path(@user, @exercise) }
       format.js
@@ -50,7 +50,7 @@ class ExercisesController < ApplicationController
 
   private
   def exercise_params
-    params.require(:exercise).permit(:name, :burned, :user_id => current_user.id)
+    params.require(:exercise).permit(:exercise_name, :burned, :user_id => current_user.id)
   end
 
 end

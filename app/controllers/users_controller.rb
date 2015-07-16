@@ -2,10 +2,17 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @user = current_user
-    if params[:column] && params[:direction]
-      @foods = @user.foods.order(params[:column] => params[:direction])
-    else
-      @foods = @user.foods
+    if current_user
+      if params[:food_column] && params[:food_direction]
+        @foods = @user.foods.order(params[:food_column] => params[:food_direction])
+      else
+        @foods = @user.foods
+      end
+      if params[:exercise_column] && params[:exercise_direction]
+        @exercises = @user.exercises.order(params[:exercise_column] => params[:exercise_direction])
+      else
+        @exercises = @user.exercises
+      end
     end
   end
 

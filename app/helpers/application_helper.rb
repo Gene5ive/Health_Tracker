@@ -7,15 +7,26 @@
 # end
 
 module ApplicationHelper
-  def sortable(column)
-    title = column.titleize
+  def sortable_food(food_column)
+    title = food_column.titleize
 
-    if params[:direction] == 'asc'
-      direction = 'desc'
+    if params[:food_direction] == 'asc'
+      food_direction = 'desc'
     else
-      direction = 'asc'
+      food_direction = 'asc'
     end
 
-    link_to title, users_path(:column => column, :direction => direction)
+    link_to title, users_path(:food_column => food_column, :food_direction => food_direction)
+  end
+  def sortable_exercise(exercise_column)
+    title = exercise_column.titleize
+
+    if params[:exercise_direction] == 'asc'
+      exercise_direction = 'desc'
+    else
+      exercise_direction = 'asc'
+    end
+
+    link_to title, users_path(:exercise_column => exercise_column, :exercise_direction => exercise_direction)
   end
 end
