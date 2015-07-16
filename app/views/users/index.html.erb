@@ -5,7 +5,10 @@
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
     <%= link_to 'Add Food', new_user_food_path(@user), id: "add_food_link", :class => "btn btn-success", remote: true %>
     <ul id ="foods_list">
-      <%= render(@user.foods) %>
+      <%= sortable "name" %> |
+      <%= sortable "calories" %>
+
+      <%= render(@foods) %>
     </ul>
     <h2>Total Calories Consumed: <span id="calorie_total"><%= @user.foods.sum(:calories) %></span></h2>
   </div>
